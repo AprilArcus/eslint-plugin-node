@@ -1,5 +1,4 @@
 /**
- * @fileoverview Tests for no-missing-require rule.
  * @author Toru Nagashima
  * @copyright 2015 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
@@ -25,7 +24,7 @@ var path = require("path"),
  * @returns {string} A file path to a fixture.
  */
 function fixture(name) {
-    return path.resolve(__dirname, "../../fixtures/no-missing-require", name);
+    return path.resolve(__dirname, "../../fixtures/no-missing", name);
 }
 
 //------------------------------------------------------------------------------
@@ -62,13 +61,6 @@ ruleTester.run("no-missing-import", rule, {
         },
         {
             filename: fixture("test.js"),
-            code: "import resolve from 'resolve';",
-            options: [{"publish": "*.js"}],
-            ecmaFeatures: {modules: true},
-            parserOptions: {sourceType: "module"}
-        },
-        {
-            filename: fixture("test.js"),
             code: "import mocha from 'mocha';",
             ecmaFeatures: {modules: true},
             parserOptions: {sourceType: "module"}
@@ -100,14 +92,6 @@ ruleTester.run("no-missing-import", rule, {
             ecmaFeatures: {modules: true},
             parserOptions: {sourceType: "module"},
             errors: ["\"@mysticatea/test\" is not found."]
-        },
-        {
-            filename: fixture("test.js"),
-            code: "import abc from 'no-exist-package-0';",
-            options: [{"publish": null}],
-            ecmaFeatures: {modules: true},
-            parserOptions: {sourceType: "module"},
-            errors: ["\"no-exist-package-0\" is not found."]
         },
         {
             filename: fixture("test.js"),
